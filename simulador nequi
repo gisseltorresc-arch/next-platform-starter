@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulador Interactivo Nequi</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <div class="simulador">
+    <h1>Simulador Interactivo Nequi</h1>
+    <div class="pantalla">
+      <div class="saldo">Disponible: $500.000</div>
+      <div class="bolsillos">
+        <p>Colchón: $100.000</p>
+        <p>Bolsillo: $50.000</p>
+      </div>
+      <div class="acciones">
+        <button onclick="mostrar('enviar')">💸 Enviar</button>
+        <button onclick="mostrar('sacar')">🏧 Sacar</button>
+        <button onclick="mostrar('recargar')">📱 Recargar</button>
+      </div>
+      <div class="menu">
+        <span>🏠 Inicio</span>
+        <span>🛠 Servicios</span>
+        <span>🔔 Notificaciones</span>
+      </div>
+    </div>
+    <div id="funcion"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+body {
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.simulador {
+  width: 360px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #d5008f;
+}
+
+.saldo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.bolsillos p {
+  margin: 5px 0;
+}
+
+.acciones button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  background-color: #d5008f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  font-size: 18px;
+}
+function mostrar(funcion) {
+  const contenedor = document.getElementById("funcion");
+  if (funcion === "enviar") {
+    contenedor.innerHTML = `
+      <h2>Enviar Plata</h2>
+      <select><option>A otros Nequi</option><option>A otros bancos</option></select><br>
+      <input type="text" placeholder="Número de celular"><br>
+      <input type="text" placeholder="Monto a enviar"><br>
+      <input type="text" placeholder="Mensaje (opcional)"><br>
+      <button onclick="alert('¡Plata enviada con éxito a 31X XXX XX XX!')">Enviar</button>
+    `;
+  } else if (funcion === "sacar") {
+    const codigo = Math.floor(100000 + Math.random() * 900000);
+    contenedor.innerHTML = `
+      <h2>Sacar Plata</h2>
+      <input type="text" placeholder="Monto a retirar"><br>
+      <button onclick="alert('Código generado: ${codigo}\\nVigente por 30 minutos.\\nUsa este código en cualquier cajero Bancolombia.')">Continuar</button>
+    `;
+  } else if (funcion === "recargar") {
+    contenedor.innerHTML = `
+      <h2>Recargar Celular</h2>
+      <select><option>Tigo</option><option>Claro</option><option>Movistar</option></select><br>
+      <input type="text" placeholder="Número de celular"><br>
+      <input type="text" placeholder="Valor de la recarga"><br>
+      <button onclick="confirmarRecarga()">Recargar</button>
+    `;
+  }
+}
+
+function confirmarRecarga() {
+  const confirmar = confirm("¿Deseas recargar $10.000 a 31X XXX XX XX?");
+  if (confirmar) {
+    alert("¡Recarga exitosa!");
+  }
+}
